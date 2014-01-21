@@ -19,10 +19,20 @@ Template.main.events({
         //console.log(res.content);
         console.log('you searched for ' + qterm)
         dataPies = JSON.parse(res.content);
+        
         for (var i = 0; i < dataPies.docs.length; i++){  
           console.log(dataPies.docs[i].dataProvider);
+          Session.set("presults", dataPies.docs[i].dataProvider);
         }
+        //Session.set("presults", dataPies);
       });
     
   }
+
+});
+
+Template.main.results({
+
+  return Session.get("presults");
+
 });
