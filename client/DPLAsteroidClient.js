@@ -1,5 +1,5 @@
 Template.main.events({
-  'click #button' : function () {
+  'click input#button' : function () {
     // template data, if any, is available in 'this'
     if (typeof console !== 'undefined') 
       console.log("You pressed the button");
@@ -15,9 +15,13 @@ Template.main.events({
         //}
       var qterm='';
       qterm=document.getElementById('qterm').value;
-      Meteor.call("searchDPLA", function(err,res, qterm){
-        console.log(res.content);
+      Meteor.call("searchDPLA", qterm, function(err,res){
+        //console.log(res.content);
         console.log('you searched for ' + qterm)
+        dataPies = JSON.parse(res.content);
+        for (var i = 0; i < dataPies.docs.length; i++){  
+          console.log(dataPies.docs[i].dataProvider);
+        }
       });
     
   }
