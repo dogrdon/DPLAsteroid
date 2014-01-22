@@ -16,14 +16,23 @@ Template.main.events({
       var qterm='';
       qterm=document.getElementById('qterm').value;
       Meteor.call("searchDPLA", qterm, function(err,res){
-        //console.log(res.content);
-        console.log('you searched for ' + qterm)
-        dataPies = JSON.parse(res.content);
         
+        if (err){
+          window.alert("Error: " + err.reason);
+          console.log("error occured on receiving data on server. ", err );
+        } else {
+          console.log("response: ", res);
+        
+          Session.set("myResp", res);
+        }
+
+
+        /*
         for (var i = 0; i < dataPies.docs.length; i++){  
           console.log(dataPies.docs[i].dataProvider);
           Session.set("presults", dataPies.docs[i].dataProvider);
         }
+        */
         //Session.set("presults", dataPies);
       });
     
@@ -31,8 +40,8 @@ Template.main.events({
 
 });
 
-Template.main.results({
+Template.main.results = function(){
 
-  return Session.get("presults");
+  return Session.get("myResp") || [];
 
-});
+}

@@ -22,9 +22,7 @@
     <div class="container" id="main">
        {{>main}}
 
-       {{#each results}}
-          <p>{{count}}</p>
-       {{/each}}
+       
     </div>
 </body>
  
@@ -37,7 +35,9 @@
             
               Search the DPLA: <input id="qterm" type="text" name="searchterm">
               <input id="button" type="button" value="search" />
-            
+                {{#each results}}
+                  <p>{{this}}</p>
+                {{/each}}
   				  
             </div>
         </div>
