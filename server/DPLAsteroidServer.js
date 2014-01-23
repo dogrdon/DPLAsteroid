@@ -15,7 +15,7 @@ Meteor.startup(function () {
       	console.log('got the data.')
       	console.log('you searched for ' + qterm)
         dataPies = JSON.parse(result.content);
-        console.log(dataPies);
+        console.log(dataPies.count);
         //return dataPies;
 
         var finalRes = [];
@@ -23,6 +23,12 @@ Meteor.startup(function () {
           finalRes.push(dataPies.docs[i].dataProvider);
           
         }
+
+        /* tried to return a better object
+        var thingee = {
+          "count" : dataPies.count,
+          "provider" : finalRes
+        }*/
 
         return finalRes;
 

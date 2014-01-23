@@ -22,7 +22,7 @@ Template.main.events({
           console.log("error occured on receiving data on server. ", err );
         } else {
           console.log("response: ", res);
-        
+          Session.keys = {}; /* clear out the sessions?*/
           Session.set("myResp", res);
         }
 
